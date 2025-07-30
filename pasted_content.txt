@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة مخازن الملابس - مدرسة الخليج الأمريكية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+        .sidebar {
+            transition: all 0.3s ease;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+        }
+        .rtl-grid {
+            direction: rtl;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-blue-800 text-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <button id="menuToggle" class="md:hidden text-white focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+                <div class="flex items-center">
+                    <img src="https://via.placeholder.com/40" alt="School Logo" class="h-10 w-10 rounded-full">
+                    <h1 class="text-xl font-bold mr-2">مدرسة الخليج الأمريكية</h1>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <div class="relative">
+                    <button class="text-white focus:outline-none">
+                        <i class="fas fa-bell text-xl"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </button>
+                </div>
+                <div class="flex items-center space-x-2 space-x-reverse">
+                    <img src="https://via.placeholder.com/40" alt="User" class="h-8 w-8 rounded-full">
+                    <span class="hidden md:inline">مدير النظام</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex">
+        <!-- Sidebar -->
+        <aside class="sidebar bg-white w-64 h-screen fixed shadow-lg z-10">
+            <div class="p-4 border-b border-gray-200">
+                <h2 class="text-lg font-semibold text-gray-700">إدارة المخازن</h2>
+            </div>
+            <nav class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 space-x-reverse p-2 rounded-lg bg-blue-100 text-blue-700">
+                            <i class="fas fa-home"></i>
+                            <span>الرئيسية</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 space-x-reverse p-2 rounded-lg hover:bg-gray-100 text-gray-700">
+                            <i class="fas fa-tshirt"></i>
+                            <span>الملابس</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 space-x-reverse p-2 rounded-lg hover:bg-gray-100 text-gray-700">
+                            <i class="fas fa-boxes"></i>
+                            <span>المخزون</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 space-x-reverse p-2 rounded-lg hover:bg-gray-100 text-gray-700">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>حركات المخزن</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 space-x-reverse p-2 rounded-lg hover:bg-gray-100 text-gray-700">
+                            <i class="fas fa-users"></i>
+                            <span>الطلاب</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 space-x-reverse p-2 rounded-lg hover:bg-gray-100 text-gray-700">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>التقارير</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 space-x-reverse p-2 rounded-lg hover:bg-gray-100 text-gray-700">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>طلبات الشراء</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 space-x-reverse p-2 rounded-lg hover:bg-gray-100 text-gray-700">
+                            <i class="fas fa-cog"></i>
+                            <span>الإعدادات</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 mr-64 p-4 md:ml-0 transition-all duration-300">
+            <div class="container mx-auto px-4">
+                <!-- Dashboard Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 rtl-grid">
+                    <div class="bg-white p-4 rounded-lg shadow-md border-r-4 border-blue-500">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-gray-500">إجمالي الملابس</p>
+                                <h3 class="text-2xl font-bold">1,248</h3>
+                            </div>
+                            <div class="bg-blue-100 p-3 rounded-full">
+                                <i class="fas fa-tshirt text-blue-500 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border-r-4 border-green-500">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-gray-500">الملابس المتاحة</p>
+                                <h3 class="text-2xl font-bold">856</h3>
+                            </div>
+                            <div class="bg-green-100 p-3 rounded-full">
+                                <i class="fas fa-check-circle text-green-500 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border-r-4 border-yellow-500">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-gray-500">الملابس المستلمة</p>
+                                <h3 class="text-2xl font-bold">392</h3>
+                            </div>
+                            <div class="bg-yellow-100 p-3 rounded-full">
+                                <i class="fas fa-user-check text-yellow-500 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border-r-4 border-red-500">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-gray-500">الملابس الناقصة</p>
+                                <h3 class="text-2xl font-bold">42</h3>
+                            </div>
+                            <div class="bg-red-100 p-3 rounded-full">
+                                <i class="fas fa-exclamation-triangle text-red-500 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border-r-4 border-purple-500">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-gray-500">طلبات بانتظار الدفع</p>
+                                <h3 class="text-2xl font-bold">8</h3>
+                            </div>
+                            <div class="bg-purple-100 p-3 rounded-full">
+                                <i class="fas fa-file-invoice-dollar text-purple-500 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activities and Inventory -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 rtl-grid">
+                    <!-- Recent Activities -->
+                    <div class="lg:col-span-2 bg-white p-4 rounded-lg shadow-md">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-lg font-semibold">آخر الحركات</h2>
+                            <a href="#" class="text-blue-500 text-sm">عرض الكل</a>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">التاريخ</th>
+                                        <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">النوع</th>
+                                        <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الكمية</th>
+                                        <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الحالة</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">2023-06-15</td>
+                                        <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">قميص مدرسي</td>
+                                        <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">+50</td>
+                                        <td class="px-4 py-2 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">تمت</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">2023-06-14</td>
+                                        <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">بنطال</td>
+                                        <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">-30</td>
+                                        <td class="px-4 py-2 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">قيد التنفيذ</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">2023-06-13</td>
+                                        <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">جاكيت شتوي</td>
+                                        <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">+20</td>
+                                        <td class="px-4 py-2 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">تمت</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">2023-06-12</td>
+                                        <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">تيشرت رياضة</td>
+                                        <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">-45</td>
+                                        <td class="px-4 py-2 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">ملغاة</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Inventory Status -->
+                    <div class="bg-white p-4 rounded-lg shadow-md">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-lg font-semibold">حالة المخزون</h2>
+                            <a href="#" class="text-blue-500 text-sm">عرض الكل</a>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">قميص مدرسي</span>
+                                    <span class="text-sm font-medium text-gray-700">320/500</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-blue-600 h-2.5 rounded-full" style="width: 64%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">بنطال</span>
+                                    <span class="text-sm font-medium text-gray-700">210/300</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-green-600 h-2.5 rounded-full" style="width: 70%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">جاكيت شتوي</span>
+                                    <span class="text-sm font-medium text-gray-700">85/150</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 56%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">تيشرت رياضة</span>
+                                    <span class="text-sm font-medium text-gray-700">45/200</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-red-600 h-2.5 rounded-full" style="width: 22%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <h3 class="text-md font-semibold mb-2">تحذيرات المخزون</h3>
+                            <div class="bg-red-50 border border-red-200 rounded-lg p-3">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-exclamation-circle text-red-500 mt-1"></i>
+                                    </div>
+                                    <div class="mr-3">
+                                        <p class="text-sm text-red-700">كمية التيشرت الرياضي على وشك النفاد. يرجى طلب المزيد قريباً.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Purchase Orders -->
+                <div class="mt-6 bg-white p-4 rounded-lg shadow-md">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-semibold">طلبات الشراء الحديثة</h2>
+                        <a href="#" class="text-blue-500 text-sm">عرض الكل</a>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">رقم الطلب</th>
+                                    <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">التاريخ</th>
+                                    <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الصنف</th>
+                                    <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الكمية</th>
+                                    <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الحالة</th>
+                                    <th class="px-4 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الإجراء</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">PO-2023-156</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">2023-06-15</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">قميص مدرسي</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">20</td>
+                                    <td class="px-4 py-2 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">بانتظار الدفع</span>
+                                    </td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                                        <button class="text-blue-500 hover:text-blue-700 mr-2"><i class="fas fa-eye"></i></button>
+                                        <button class="text-green-500 hover:text-green-700"><i class="fas fa-check"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">PO-2023-155</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">2023-06-14</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900">بنطال</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">15</td>
+                                    <td class="px-4 py-2 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">مدفوع</span>
+                                    </td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                                        <button class="text-blue-500 hover:text-blue-700 mr-2"><i class="fas fa-eye"></i></button>
+                                        <button class="text-green-500 hover:text-green-700"><i class="fas fa-check"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="mt-6 bg-white p-4 rounded-lg shadow-md">
+                    <h2 class="text-lg font-semibold mb-4">إجراءات سريعة</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 rtl-grid">
+                        <button class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-200 transition-colors">
+                            <div class="bg-blue-100 p-3 rounded-full mb-2">
+                                <i class="fas fa-plus text-blue-500"></i>
+                            </div>
+                            <span class="text-sm font-medium">إضافة صنف جديد</span>
+                        </button>
+                        <button class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-green-50 hover:border-green-200 transition-colors">
+                            <div class="bg-green-100 p-3 rounded-full mb-2">
+                                <i class="fas fa-dolly text-green-500"></i>
+                            </div>
+                            <span class="text-sm font-medium">إدخال مخزون</span>
+                        </button>
+                        <button class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-yellow-50 hover:border-yellow-200 transition-colors">
+                            <div class="bg-yellow-100 p-3 rounded-full mb-2">
+                                <i class="fas fa-user-graduate text-yellow-500"></i>
+                            </div>
+                            <span class="text-sm font-medium">تسليم للطالب</span>
+                        </button>
+                        <button class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-purple-50 hover:border-purple-200 transition-colors">
+                            <div class="bg-purple-100 p-3 rounded-full mb-2">
+                                <i class="fas fa-file-export text-purple-500"></i>
+                            </div>
+                            <span class="text-sm font-medium">تصدير تقرير</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Toggle mobile menu
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        });
+
+        // Sample data for charts (would be replaced with real data in production)
+        const inventoryData = {
+            labels: ['قميص مدرسي', 'بنطال', 'جاكيت شتوي', 'تيشرت رياضة'],
+            datasets: [{
+                data: [320, 210, 85, 45],
+                backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444'],
+            }]
+        };
+
+        // Initialize charts (this would be more elaborate in a real application)
+        document.addEventListener('DOMContentLoaded', function() {
+            // In a real app, we would initialize charts here using Chart.js or similar
+            console.log('System ready. Charts would be initialized here.');
+            
+            // Sample notification for low inventory
+            setTimeout(() => {
+                const notification = document.createElement('div');
+                notification.className = 'fixed bottom-4 left-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center';
+                notification.innerHTML = `
+                    <i class="fas fa-exclamation-circle mr-2"></i>
+                    <span>تحذير: كمية التيشرت الرياضي منخفضة جداً!</span>
+                `;
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 5000);
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
